@@ -40,16 +40,31 @@ router.get('/', (req, res) => {
   
   //creating a POST request route. adding new goods/services
 router.post('/', (req, res) => {
-    if (req.body.userId && req.body.title && req.body.content) {
+    if (req.body.bizId && req.body.product && req.body.description) {
         const good = {
           id: goods[goods.length - 1].id + 1,
-          userId: req.body.userId,
-          title: req.body.title,
-          content: req.body.content,
+          bizId: req.body.bizId,
+          product: req.body.product,
+          description: req.body.description,
         };
-    
+
         goods.push(good);
         res.json(goods[goods.length - 1]);
       } else next(error(400, 'Insufficient Data'));
     });
     
+
+// removing a good/service (delete)
+    router.delete('/:id', (req, res) => {
+        const good = goods.find((g, i) => {
+          if (g.id == req.params.id) {
+            goods.splice(i, 1);
+            return true;
+          }
+        });
+      
+        if (good) res.json(good);
+        else next();
+      });
+      
+      module.exports = router;
