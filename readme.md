@@ -1,0 +1,1 @@
+An app that makes bartering easy. Search for goods and services available for trade/exchange from local businesses near you. utilizes, js, node, nodemon, express, and ejs.
